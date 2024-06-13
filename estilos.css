@@ -30,7 +30,7 @@
 /* selector */
 body{
 background-color: var(--Mineshaft);
-color: var(--white);
+color: var(--white); 
 font-size: var(--font-size);
 font-family: "Kanit", sans-serif;
 line-height: 24px;
@@ -43,4 +43,129 @@ header{
   border-bottom: solid 1px var(--Husk);
   padding: var(--padding);
   margin-bottom: var(--margin);
+}
+
+section {
+  padding: var(--padding);
+}
+a{
+  color: var(--starship);
+  text-decoration: none;
+}
+
+/* selectores combinados */
+h1 , h2 {
+  padding: var(--padding);
+}
+
+
+p{
+  font-size: 1rem;
+  margin: 0 0 var(--margin);
+  color: var(--white);
+}
+
+/* aplicar un selec elemento tiene 4 puntos */
+p::first-letter{
+font-size: 1.4rem;
+color: var(--Husk);
+font-weight: bold;
+}
+
+ul{
+  list-style: none;
+}
+
+ul.list > li.item {
+cursor: pointer;
+}
+li.item:hover a{
+  color: var(--Mineshaft);
+}
+
+.container {
+  max-width: var(--max-width);
+  /* background-color: var(--white); */
+  margin: 0 auto;
+  padding: 0 var(--padding);
+}
+
+.card {
+  width: 450px;
+  border: solid 1px var(--Husk);
+  border-radius: var(--border-radius);
+  margin: 0 auto;
+}
+
+.card__header {
+  padding: var(--padding);
+}
+
+.card__title{
+  text-wrap: wrap;
+  word-break: break-all;
+
+}
+
+.card__body{
+padding: var(--padding);
+}
+
+.card__img{
+width: 100%;
+}
+
+.card__paragraph{
+  padding: var(--padding);
+}
+
+.button {
+  padding: var(--padding);
+  background-color: var(--starship);
+  color: var(--Husk);
+  border-radius: var(--border-radius);
+  border: solid 0.5px var(--Sycamore);
+  font-size: 1rem;
+  font-weight: 500;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.button__text{}
+.button__icon {
+font-size: 1.4rem;
+}
+
+.button--onclick {
+  background-color: var(--Mineshaft);
+  color: var(--starship);
+}
+
+.button:hover {
+  background-color: var(--Mineshaft);
+  color: var(--Sycamore);
+}
+
+.button--onclick:hover {
+  background-color: var(--starship);
+  color: var(--Mineshaft);
+}
+
+.list {
+  text-align: center;
+  padding: var(--padding);
+}
+
+.list__item{
+border-bottom: solid 1px var(--Sycamore);
+padding: var(--padding);
+transition: var(--transition);
+font-size: var(--font-size);
+}
+
+.list__item:hover{
+  background-color: var(--Husk);
+  color: var(--Sycamore);
 }
