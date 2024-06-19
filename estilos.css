@@ -213,3 +213,7 @@ font-size: var(--font-size);
 ul.list > li.list__item:last-child{
 border-bottom: none;
 }
+
+div.card > ul.list > li.list__item > a:visited {
+  color: var(--Sycamore);
+}
