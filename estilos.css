@@ -6,6 +6,7 @@
   box-sizing: border-box;
 }
 
+/* justo propy */
 :root{
   --starship:#F3DB4C;
   --Mineshaft: #343434;
@@ -48,7 +49,8 @@ header{
 section {
   padding: var(--padding);
 }
-a{
+
+a, .list__item{
   color: var(--starship);
   text-decoration: none;
 }
@@ -76,9 +78,10 @@ ul{
   list-style: none;
 }
 
-ul.list > li.item {
+.list__item{
 cursor: pointer;
 }
+
 li.item:hover a{
   color: var(--Mineshaft);
 }
@@ -88,6 +91,38 @@ li.item:hover a{
   /* background-color: var(--white); */
   margin: 0 auto;
   padding: 0 var(--padding);
+}
+
+/* FORMULARIO DE BUSQUEDA */
+
+.search{
+  display: flex;
+  justify-content: end;
+}
+
+.search__form{
+  display: inline-grid;
+  grid-template-columns: auto 40px;
+  grid-row: auto;
+  border: solid 2px var(--starship);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--margin);
+  padding: var(--padding);
+  gap: 10px;
+}
+
+.input {
+  width: 100%;
+  padding: var(--padding);
+  outline: none;
+  border: solid 2px var(--starship);
+  font-size: 1rem;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
 .card {
@@ -125,12 +160,17 @@ width: 100%;
   color: var(--Husk);
   border-radius: var(--border-radius);
   border: solid 0.5px var(--Sycamore);
-  font-size: 1rem;
+  font-size: .9rem;
   font-weight: 500;
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
   transition: var(--transition);
+}
+
+.button--icon{
+  justify-content: center;
+  align-items: center;
 }
 
 .button__text{}
@@ -168,4 +208,8 @@ font-size: var(--font-size);
 .list__item:hover{
   background-color: var(--Husk);
   color: var(--Sycamore);
+}
+
+ul.list > li.list__item:last-child{
+border-bottom: none;
 }
