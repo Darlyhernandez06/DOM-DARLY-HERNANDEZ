@@ -26,6 +26,6 @@ usuarios().then((listado) => {
     $div.classList.add("box")
     $div.textContent = usuario.name;
     $div.appendChild($h2);
-    $root.appendChild($div)
+    $root.appendChild($div);
   });
 }).catch();
