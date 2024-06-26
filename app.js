@@ -1,5 +1,7 @@
 // objeto padre en el navegador
 // Crear, acceder, modificar
+// dom travesi
+
 let wh = window;
 let dom = document;
 let head = dom.head;
@@ -40,4 +42,46 @@ console.log($main.childNodes);
 $main.childNodes.forEach(nodo => console.log(nodo));
 console.log($main.childNodes[1]);
 
-$main.childNodes.filter(nodo) =>
+// covertirmos el node de una lista a un arreglo
+// const arregloNodo = Array.from($main.childNodes);
+
+const arregloNodo = [...$main.childNodes]
+
+const nuevo2 = arregloNodo.filter((nodo) => (nodo.nodeType === nodo.TEXT_NODE) ? true : false);
+
+console.log(nuevo2);
+console.log(arregloNodo);
+
+// ELEMENTO DE MAIN
+console.clear();
+console.log($main.children); // LOS HIJOS 
+console.log($main.parentElement); // VAMOS A BUSCAR EL PAPA
+console.log($main.previousElementSibling); // HERMANO PREVIO A MI
+console.log($main.nextElementSibling); // HERMANO SIGUIENTE A MI
+
+
+
+// taer los hijos 
+console.clear();
+
+// all es para trare todos 
+const $buscar = dom.querySelectorAll("div.card > ul.list > li.list__item > a")
+console.log($buscar);
+
+
+const $buscar1 = dom.querySelector("#apropiedad")
+console.log($buscar1);
+
+
+// FORMULARIO
+const $from = dom.querySelector("#search")
+console.log($from);
+
+$from.setAttribute('metod', 'GET') // LE AGREA EL ATRIBUTO
+
+$from.firstElementChild.removeAttribute("placeholder"); // LE QUITA EL ATRBUTO
+
+console.log($from);
+
+
+// ACTIVAR EL AUTOCOMPLETADO DEL FORMULARIO 
