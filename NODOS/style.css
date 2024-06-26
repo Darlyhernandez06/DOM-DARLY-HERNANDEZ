@@ -1,11 +1,40 @@
-*{
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-.box{
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+#root {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.box {
   width: 250px;
-  height: 250px;
-  background-color: steelblue;
-  color:black;
+  height: auto;
+  background-color: pink;
+  color: black;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(255, 0, 217, 0.764);
+}
+
+.box h2 {
+  font-size: 25px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.box p {
+  font-size: 16px;
+  margin-bottom: 10px;
 }

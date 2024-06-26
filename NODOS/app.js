@@ -22,10 +22,42 @@ const $root = document.querySelector("#root");
 usuarios().then((listado) => {
   listado.forEach(usuario => {
     const $div = document.createElement("div");
+    $div.classList.add("box");
+    
     const $h2 = document.createElement("h2");
-    $div.classList.add("box")
-    $div.textContent = usuario.name;
+    $h2.textContent = usuario.name;
     $div.appendChild($h2);
+
+    const $pUsername = document.createElement("p");
+    $pUsername.textContent = `Username: ${usuario.username}`;
+    $div.appendChild($pUsername);
+
+    const $pEmail = document.createElement("p");
+    $pEmail.textContent = `Email: ${usuario.email}`;
+    $div.appendChild($pEmail);
+
+    const $pAddress = document.createElement("p");
+    $pAddress.textContent = `Adress: ${usuario.address.street}, ${usuario.address.suite}, ${usuario.address.city}, ${usuario.address.zipcode} `;
+    $div.appendChild($pAddress);
+
+    const $pGeo = document.createElement("p");
+    $pGeo.textContent = `Geo: ${usuario.address.geo.lat}, ${usuario.address.geo.lng} `;
+    $div.appendChild($pGeo);
+
+    const $pPhone = document.createElement("p");
+    $pPhone.textContent = `Phone: ${usuario.phone}`;
+    $div.appendChild($pPhone);
+
+    const $pWebsite = document.createElement("p");
+    $pWebsite.textContent = `Website: ${usuario.website}`;
+    $div.appendChild($pWebsite);
+
+    const $pCompany = document.createElement("p");
+    $pCompany.textContent = `Company: ${usuario.company.name}, ${usuario.company.catchPhrase}, ${usuario.company.bs} `;
+    $div.appendChild($pCompany);
+
     $root.appendChild($div);
   });
-}).catch();
+}).catch(error => {
+  console.error('Error fetching users:', error);
+});
