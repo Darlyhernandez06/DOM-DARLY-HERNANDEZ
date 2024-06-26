@@ -9,7 +9,7 @@ const $header = dom.querySelector("header");
 const $header_class = dom.querySelector("header");
 const $header_class_all = dom.querySelectorAll(".header");
 const $header_id = dom.querySelector("#header");
-  
+
 console.log(wh);
 console.log(dom);
 console.log(head);
@@ -27,8 +27,17 @@ console.log($header_id);
 const id = document.getElementById("header");
 const _class = document.getElementsByClassName("header");
 
+const $main = dom.querySelector("main");
+
 console.log(id);
 console.log(_class[0]);
 
 console.clear();
 console.log(body.childNodes);
+console.log($main.childNodes);
+
+//cuando recibo mas de un parametro tengo que colocar parentesis
+$main.childNodes.forEach(nodo => console.log(nodo));
+console.log($main.childNodes[1]);
+
+$main.childNodes.filter(nodo) =>
