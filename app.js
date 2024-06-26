@@ -1,6 +1,7 @@
 // objeto padre en el navegador
 // Crear, acceder, modificar
 // dom travesi
+// dom elementos y nodos
 
 let wh = window;
 let dom = document;
@@ -62,7 +63,7 @@ console.log($main.nextElementSibling); // HERMANO SIGUIENTE A MI
 
 
 // taer los hijos 
-console.clear();
+console.clear(); // PARA LIMPIAR LA CONSOLA
 
 // all es para trare todos 
 const $buscar = dom.querySelectorAll("div.card > ul.list > li.list__item > a")
@@ -81,7 +82,12 @@ $from.setAttribute('metod', 'GET') // LE AGREA EL ATRIBUTO
 
 $from.firstElementChild.removeAttribute("placeholder"); // LE QUITA EL ATRBUTO
 
-console.log($from);
+$from.firstElementChild.setAttribute('autocomplete', 'on') // ACTIVAR EL AUTOCOMPLETADO DEL FORMULARIO
 
+$from.classList.add("otra_clase"); // AGREGAR UNA NUEVA CLASE
+console.log($from.classList);
 
-// ACTIVAR EL AUTOCOMPLETADO DEL FORMULARIO 
+$from.classList.remove("otra_clase"); // QUITAR UNA NUEVA CLASE
+console.log($from.classList);
+
+$from.classList.toggle("otra_clase"); // VA A VILIDAR SI LA TIENE
