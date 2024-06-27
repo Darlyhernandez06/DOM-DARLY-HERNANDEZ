@@ -65,3 +65,5 @@ usuarios().then((listado) => {
 }).catch(error => {
   console.error('Error fetching users:', error);
 });
+
+// FRAGMENTOS
