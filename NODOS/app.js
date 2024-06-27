@@ -2,6 +2,9 @@
 import { usuarios } from "./modulo.js";
 const $root = document.querySelector("#root");
 
+// FRAGMENTOS
+const $card = document.createDocumentFragment();
+
 // const $div = document.createElement("div");
 // const $p = document.createElement("p");
 // let texto = "Este seria el texto del elemento"
@@ -65,5 +68,3 @@ usuarios().then((listado) => {
 }).catch(error => {
   console.error('Error fetching users:', error);
 });
-
-// FRAGMENTOS
