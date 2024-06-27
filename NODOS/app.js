@@ -22,7 +22,7 @@ const $root = document.querySelector("#root");
 usuarios().then((listado) => {
   listado.forEach(usuario => {
     const $div = document.createElement("div");
-    $div.classList.add("box");
+    $div.classList.add("box", "border"); // agregar estilos 
     
     const $h2 = document.createElement("h2");
     $h2.textContent = usuario.name;
