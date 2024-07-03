@@ -8,6 +8,7 @@ node -v
 ```
 
 Paso 2: Instalación de Node.js
+
 Si la versión no es la requerida (v20.15.0), descarga Node.js desde el sitio oficial:
 
 1.Abre tu navegador y busca "Node.js".
