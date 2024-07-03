@@ -98,6 +98,8 @@ Notas adicionales:
 
 2.Puedes practicar con diferentes archivos JSON para explorar diversas simulaciones.
 
+
+
 # EXPLICACION PARA INTEGRAR JSON SEVER EN TU APLICACION WEB:
 
 Paso 1: Definición del Módulo modulo.js
@@ -125,7 +127,7 @@ Convierte la respuesta en formato JSON usando el método json().
 
 Retorna los datos obtenidos del servidor JSON.
 
-# ESTO SOLO ES UN EJEMPLO DE COMO PODRIA SER, YA QUE DEPENDE DE COMO LO QUERESMOS HACER, ESTO SOLO ES UNA BASE
+# ESTO SOLO ES UN EJEMPLO DE COMO PODRIA SER, YA QUE DEPENDE DE COMO LO QUEREMOS HACER, ESTO SOLO ES UNA BASE
 
 ```
 export const usuarios = async () => {
@@ -164,7 +166,7 @@ Llena el contenido clonado con los datos específicos del usuario.
 
 Agrega el contenido clonado a tu documento HTML, por ejemplo, mediante appendChild().
 
-# ESTO SOLO ES UN EJEMPLO DE COMO PODRIA SER, YA QUE DEPENDE DE COMO LO QUERESMOS HACER, ESTO SOLO ES UNA BASE
+# ESTO SOLO ES UN EJEMPLO DE COMO PODRIA SER, YA QUE DEPENDE DE COMO LO QUEREMOS HACER, ESTO SOLO ES UNA BASE
 
 ```
 // "use strict";
