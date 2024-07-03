@@ -2,7 +2,7 @@
 import { usuarios } from "./modulo.js";
 const $root = document.querySelector("#root");
 
-// TEMPLATE
+// TEMPLATE, // Obtener el template y su contenido
 const $template = document.querySelector("#template").content;
 
 // FRAGMENTOS
@@ -67,10 +67,22 @@ usuarios().then((listado) => {
     // $pCompany.textContent = `Company: ${usuario.company.name}, ${usuario.company.catchPhrase}, ${usuario.company.bs} `;
     // $div.appendChild($pCompany);
 
-    $template.querySelector("h2").textContent = usuario.name;
-    $template.querySelector("div > p").textContent = usuario.email;
-    $template.querySelector("div > p ~ p").textContent = usuario.username;
+    // Llenar los datos del usuario en el template clonado
+    // $template.querySelector("h2").textContent = usuario.name;
+    // $template.querySelector("div > p").textContent = usuario.email;
+    // $template.querySelector("div > p ~ p").textContent = usuario.username;
 
+    // Llenar los datos del usuario en el template clonado
+    $template.querySelector('.user-name').textContent = usuario.name;
+    $template.querySelector('.user-username').textContent = usuario.username;
+    $template.querySelector('.user-email').textContent = usuario.email;
+    $template.querySelector('.user-address').textContent = `${usuario.address.street}, ${usuario.address.suite}, ${usuario.address.city}, ${usuario.address.zipcode}`;
+    $template.querySelector('.user-geo').textContent = `${usuario.address.geo.lat}, ${usuario.address.geo.lng}`;
+    $template.querySelector('.user-phone').textContent = usuario.phone;
+    $template.querySelector('.user-website').textContent = usuario.website;
+    $template.querySelector('.user-company').textContent = `${usuario.company.name}, ${usuario.company.catchPhrase}, ${usuario.company.bs}`;
+
+    // Clonar el contenido del template para usarlo
     let clone = document.importNode($template, true)
 
     $card.appendChild(clone)
@@ -78,3 +90,5 @@ usuarios().then((listado) => {
   });
   $root.appendChild($card);
 }).catch();
+
+
