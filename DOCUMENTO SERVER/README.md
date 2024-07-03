@@ -27,7 +27,7 @@ PASO 3: Instalación de Node.js
 
 PASO 4: Ahora lo que vamos hacer es a instalar demanera global json-server y que nos funcione en todo el computador.
 
-Paso 5: Instalación global de JSON Server
+PASO 5: Instalación global de JSON Server
 
 1.Abre tu navegador y busca "JSON Server".
 
@@ -58,7 +58,7 @@ cd server
 code .
 ```
 
-Paso 7: Preparación del archivo JSON
+PASO 7: Preparación del archivo JSON
 
 1.Crea un archivo llamado db.json en la carpeta "server".
 Copia y pega el contenido del archivo JSON que desees simular o podemos copiar el archio que nos aparece en la pagina, para que sigamos con la explicacion y podamos observar.
@@ -67,7 +67,7 @@ Copia y pega el contenido del archivo JSON que desees simular o podemos copiar e
 db.json 
 ```
 
-Paso 8: Activación de JSON Server
+PASO 8: Activación de JSON Server
 
 En Git Bash, ejecuta el siguiente comando para activar JSON Server con tu archivo db.json:
 
