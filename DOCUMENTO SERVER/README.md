@@ -1,61 +1,91 @@
-# INSTALAR 
+# INSTALACIÓN Y USO DE JSON SERVER
 
-PASO 1: Antes de todo en la consola de Git Bash vamos averificar que version tenemos de Node, vamos a colocar el siguiente comando: 
+Paso 1: Verificar la versión de Node.js
+Abre Git Bash y verifica la versión actual de Node.js con el siguiente comando: 
 
 ```
 node -v
 ```
 
-PASO 2: Ya que la version que tenemos que tener es la v20.15.0, si tenemos una version diferente a esta, a continuacion vamos a instalarla, nos dirigimos a nuestro navegador de preferencia y vamos a colocar lo siguiente: 
+Paso 2: Instalación de Node.js
+Si la versión no es la requerida (v20.15.0), descarga Node.js desde el sitio oficial:
+
+1.Abre tu navegador y busca "Node.js".
 
 ```
 Node.js
 ```
 
-PASO 3: Le damos en el primero que nos salga, lo abrimos y seguido nos va a salir para descargamos la vesion, lo hacemos y esperamos unos minutos a que se descargue, despues de que ya lo tengamos descargado, lo abrimos y como normalmente se va a instarlar algo, empezamos a darle Next a todo y al final sale para instarlar
+PASO 3: Instalación de Node.js
 
-Reiniciamos nuestro computador para que la version si se nos actualice, despues de hacer, volvemos abrir la consola Git Bash, escribimos el primer comando para ver que version tenemos y ya nos deberia salir la version (v20.15.0) y esto nos sale, es que se instalo correctamente nuestra version
+1.Selecciona el primer resultado y descarga la versión adecuada.
+2.Ejecuta el instalador descargado, siguiendo las instrucciones de instalación estándar. (esperamos unos minutos a que se descargue, despues de que ya lo tengamos descargado, lo abrimos y como normalmente se va a instalar algo, empezamos a darle Next a todo y al final sale para instalar).
 
-PASO 4: Ahora lo que vamos hacer es a instalar demanera global json-server y que nos funcione en todo el computador, en nuestro nevagador de preferencia buscamos la siguiente pagina:
+3.Reiniciamos nuestro computador para que la version si se nos actualice, despues de hacer, volvemos abrir la consola Git Bash, escribimos el primer comando para ver que version tenemos y ya nos deberia salir la version (v20.15.0) y si esto nos sale es que se instalo correctamente nuestra version
+
+PASO 4: Ahora lo que vamos hacer es a instalar demanera global json-server y que nos funcione en todo el computador.
+
+Paso 5: Instalación global de JSON Server
+
+1.Abre tu navegador y busca "JSON Server".
+2.Accede al sitio oficial y consulta la sección de instalación.
 
 ```
 json server
 ```
 
-PASO 5: Abrimos la primera que nos salga, para observar diferentes comandos, como podemos observar en la pagina, donde nos sale el comando install, tomamos ese comando, pero a ese comando le tenemos que agregar la -g para que sea global, lo podemos ver en el siguiente comando: 
+3.Ejecuta el siguiente comando en Git Bash para instalar JSON Server globalmente:
 
 ```
 npm install -g json-server
 ```
 
-PASO 6: vamos a crear una nueva carpeta en nuestra consola de Git Bash que se llame server para poder trabajar bien, depues de que la creemos abrimos nuestro visual 
+PASO 6: Creación del entorno de trabajo
+
+1.Crea una nueva carpeta llamada "server" desde Git Bash:
+
+```
+mkdir server
+cd server
+```
+
+2.Abre Visual Studio Code en la carpeta recién creada:
 
 ```
 code .
 ```
 
-PASO 7: vamos a crear un archivo json, en la carpeta que creamos, cuando ya la tengamos creada vamos a copiar el archivo json que nosotros queramos o podemos copiar el archio que nos aparece en la pagina, para que sigamos con la explicacion y podamos observar.
+Paso 7: Preparación del archivo JSON
+1.Crea un archivo llamado db.json en la carpeta "server".
+Copia y pega el contenido del archivo JSON que desees simular o podemos copiar el archio que nos aparece en la pagina, para que sigamos con la explicacion y podamos observar.
 
 ```
 db.json 
 ```
 
-PASO 8: aqui depues de colocar nuestro archivo json vamos a colocar el siguiente comando en Git Bash, para que podamos activar nuestro json-server
+Paso 8: Activación de JSON Server
+En Git Bash, ejecuta el siguiente comando para activar JSON Server con tu archivo db.json:
 
 ```
 npx json-server db.json
 ```
 
-PASO 9: Ahora en nuestro navegador vamos a colocar lo siguiente que esto lo podemos visualizar depues de activar el json-sever
+PASO 9: Acceso a JSON Server desde el navegador
+
+1.Abre tu navegador web y visita:
 
 ```
 localhost:3000
 ```
 
+2.Aquí podrás ver y interactuar con los datos del archivo JSON simulado.
+
 Aqui podemos visualizar una ventana que dice JSON Server y podemos observar los archivos json que nosotros hemos colocado, le damos click ahi y nos va a mostrar el archivo json
 
-PASO 10: asi podemos colocar archios json y hacer una simulacion, para apagar nuestro json-server solo le damos (ctrl c), tenemos que verificar que nuestra json-server no este apagada, cuando queremos visualizar un json porque no va a salir
+PASO 10: Detener JSON Server
+Para detener JSON Server, presiona Ctrl + C en la terminal donde se está ejecutando.
 
-Podemos practicar con diferentes archivos json para que se puedan visualizar 
+Notas adicionales:
+1.Asegúrate de que JSON Server esté activo siempre que desees acceder a los datos simulados.
 
-Ahora vamos hacer 
+2.Puedes practicar con diferentes archivos JSON para explorar diversas simulaciones.
