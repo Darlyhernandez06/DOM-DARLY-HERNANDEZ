@@ -48,8 +48,9 @@ PASO 6: Creación del entorno de trabajo
 1.Crea una nueva carpeta llamada "server" desde Git Bash:
 
 ```
+cd d:
 mkdir server
-cd server
+cd server/
 ```
 
 2.Abre Visual Studio Code en la carpeta recién creada:
