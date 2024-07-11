@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <!-- Formulario de validacion -->
+    <div class="contenedor_principal">
+        <form>
+            <!-- Campo del nombre completo -->
+            <label for="nombres">Nombres</label>
+            <input ype="text" id="nombres" autocomplete="off" placeholder="Ingresa tus nombres">
+            <!-- Campo de los apellidos -->
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" autocomplete="off" placeholder="Ingresa tus apellidos">
+            <!-- Campo del teléfono -->
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" autocomplete="off" placeholder="Ingresa tu telefono">
+            <!-- Campo de la dirección -->
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" autocomplete="off" placeholder="Ingresa tu dirreccion">
+            <!-- Campo de ingresar documento-->
+            <label for="tipodocumento">Tipo de documento</label>
+            <select id="tipodocumento"> 
+                <option value="">Selecionar...</option>
+                <option value="1">Cédula de ciudadanía</option>
+                <option value="2">Tarjeta de identidad</option>
+            </select>
+            <!-- Campo de ingresar numero de documento-->
+            <label for="documento">Numero de documento</label>
+            <input type="text" id="documento" autocomplete="off" placeholder="Ingresa numero de documento">
+            <!-- Campo de acceptar politicas-->
+            <div class="button__checkbox">
+                <input type="checkbox" id="politicas">
+                <label for="politicas">Acepta las politicas de uso</label>
+            </div>
+            <!-- Botón de enviar -->
+            <button type="submit" id="button">Enviar</button>
+        </form>
+    </div>
+    <script src="formulario.js"></script> 
+</body>
+</html>
