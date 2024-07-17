@@ -195,6 +195,21 @@ const sololetras = (event, elemento) => {
     // event.preventDefault();
 };
 
+const correoelectronico = (event, elemento) => {
+    let validarcorreo = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
+    // Prueba si el valor del campo es válido
+    if (validarcorreo.test(elemento.value)) {
+        console.log("sí"); // Cambiar a "sí" significa que es válido
+        elemento.classList.add("correcto"); // Añade clase de correcto si es válido
+        elemento.classList.remove("error"); // Quita clase de error si es válido
+    } else {
+        console.log("no"); // Cambiar a "no" significa que es inválido
+        elemento.classList.add("error"); // Añade clase de error si no es válido
+        elemento.classList.remove("correcto"); // Quita clase de correcto si no es válido
+    }
+};
+
 documento.addEventListener("keypress", solonumeros);
 telefono.addEventListener("keypress", solonumeros);
 nombres.addEventListener("keypress", (event) => {
@@ -204,19 +219,22 @@ apellidos.addEventListener("keypress", (event) => {
     sololetras(event, apellidos);
 });
 
-// Escuchar el evento 'input' en el campo de correo
+// Validación en tiempo real del correo electrónico
 correo.addEventListener("input", (event) => {
     correoelectronico(event, correo);
 });
 
-const correoelectronico = (event, elemento) => {
-    let validarcorreo = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-    if (validarcorreo.test(elemento.value)) {
-        elemento.classList.remove("error"); // Quita clase de error si es válido
-    } else {
-        elemento.classList.add("error"); // Añade clase de error si no es válido
-    }
-};
+// darlyhernadez0624@gmail.com
+// usuario@.com
+
+
+// ^: Inicio de la cadena.
+// [a-zA-Z0-9_.+-]+: Uno o más caracteres permitidos antes de '@' (letras, dígitos, '.', '_', '+', '-').
+// @: Obligatorio, separa la parte local del dominio.
+// [a-zA-Z0-9-]+: Uno o más caracteres permitidos para el dominio antes del primer punto (letras, dígitos, '-').
+// .: Punto literal, separa las partes del dominio.
+// [a-zA-Z0-9-.]+: Uno o más caracteres permitidos después del punto (letras, dígitos, '-', '.').
+// $: Fin de la cadena.
 
 
 // const solonumeros = function(event) {
