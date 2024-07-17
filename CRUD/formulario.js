@@ -11,6 +11,26 @@ const documento = document.querySelector("#documento");
 const politicas = document.querySelector("#politicas");
 const boton = document.querySelector("#boton");
 
+
+// EXPRECIONES REGULARES PARA VALIDAR CADA CAMPO 
+
+// // validar nombre
+// let ValidarNombre = /^[a-zA-Z]{4,}$/; //sicurplejo alt 94
+
+// // validar apellido 
+// const ValidarApellido = /^[a-zA-Z\s]{4,}$/;
+// const ValidarApellido1 = /^[a-zA-ZáéíóúÁÉÍÓÚ\s]{4,}$/;
+
+// // validar telefono
+// const telefonoRegex = /^\d{10}$/; // 10 dígitos, sin espacios ni caracteres especiales
+
+// // validar dirrecion
+// const ValidarDireccion = /^[a-zA-Z0-9\s,.'-]{3,}$/; // Letras, números, espacios, comas, puntos y guiones
+
+// // validar documento
+// const ValidarDocumento = /^[0-9]{8,10}$/;  // Entre 8 y 10 dígitos
+
+
 // Función que elimina la clase error de un campo de entrada (input). Se utiliza para limpiar el estado de error cuando el campo es válido.
 const quitarClase = (input) => {
     input.classList.remove("error");
@@ -137,20 +157,81 @@ politicas.addEventListener("change", () => {
     }
 });
 
-// expreciones regulares para validar cada campo 
+// boton.addEventListener('click', function(){
+//     alert("-")
+// })
 
-// validar nombre
-const ValidarNombre = /^[a-zA-Z]{4,}$/;
+nombres.addEventListener("keypress", (event) => {
+    console.log(event);
+    console.log(this.value);
+});
 
-// validar apellido 
-const ValidarApellido = /^[a-zA-Z\s]{4,}$/;
-const ValidarApellido1 = /^[a-zA-ZáéíóúÁÉÍÓÚ\s]{4,}$/;
 
-// validar telefono
-const telefonoRegex = /^\d{10}$/; // 10 dígitos, sin espacios ni caracteres especiales
+const solonumeros = function(event) {
+    if(event.keyCode < 48 || event.keyCode > 57) 
+    event.preventDefault();
+};
 
-// validar dirrecion
-const ValidarDireccion = /^[a-zA-Z0-9\s,.'-]{3,}$/; // Letras, números, espacios, comas, puntos y guiones
+const sololetras = (event, elemento) => {
+    // console.log(elemento.value);
+    let Letras = /^[a-zA-ZÀ-ÿ\s]+$/; // Letras y espacios, pueden llevar acentos
+    if (Letras.test(event.key)) {
+        console.log("si")
+    } else {
+        console.log("no")
+        event.preventDefault();
+    }
+    // if(event.keyCode < 97 || event.keyCode > 122) 
+    // event.preventDefault();
+};
 
-// validar documento
-const ValidarDocumento = /^[0-9]{8,10}$/;  // Entre 8 y 10 dígitos
+documento.addEventListener("keypress", solonumeros);
+telefono.addEventListener("keypress", solonumeros);
+nombres.addEventListener("keypress", (event) => {
+    sololetras(event, nombres);
+});
+apellidos.addEventListener("keypress", sololetras);
+
+
+
+// const solonumeros = function(event) {
+//     if (!ValidarDocumento.test(event.value)) {
+//         documento.focus();
+//         documento.classList.add("error");
+//         event.preventDefault(); // no premite que se ingresa el elemento
+//         alert("Solo se permiten numeros")
+//     } else {
+//         quitarClase(documento);
+//     }
+// };
+
+// documento.addEventListener("keypress", solonumeros);
+
+
+// cuando pulsamos una tecla
+// documento.addEventListener("keypress", function (event) {
+//     // console.log(event.keyCode)
+//     // if(event.keyCode >= 48 && event.keyCode <= 57) {
+//     // } else {
+//     //     event.preventDefault(); // no premite que se ingresa el elemento
+//     //     alert("Solo se permiten numeros")
+//     // }
+//     if (!ValidarDocumento.test(documento.value)) {
+//         documento.focus();
+//         documento.classList.add("error");
+//         event.preventDefault(); // no premite que se ingresa el elemento
+//         alert("Solo se permiten numeros")
+//     } else {
+//         quitarClase(documento);
+//     }
+// });
+
+// // mientras mantenemos pulsada la tecla
+// documento.addEventListener("keydown", function (event) {
+//     // console.log(event)
+// });
+
+// // mientras soltamos una tecla
+// documento.addEventListener("keyup", function (event) {
+//     // console.log(event)
+// });
