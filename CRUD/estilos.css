@@ -19,13 +19,12 @@ form{
 
 input, select, button{
     padding: 12px;
-    border:none;
+    border:solid 2px #f74780;
     border-radius: 8px;
     outline: none; 
 }
 
 button{
-    border:solid 2px #f74780;
     margin-top: 30px;
 }
 

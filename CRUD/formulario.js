@@ -8,6 +8,7 @@ const telefono = document.querySelector("#telefono");
 const direccion = document.querySelector("#direccion");
 const tipodocumento = document.querySelector("#tipodocumento");
 const documento = document.querySelector("#documento");
+const correo = document.querySelector("#correo");
 const politicas = document.querySelector("#politicas");
 const boton = document.querySelector("#boton");
 
@@ -62,6 +63,15 @@ const validar = (event) => {
         valid = false;
     } else {
         quitarClase(apellidos);
+    }
+
+    // Validación del campo de correo
+    if (correo.value === "") {
+        correo.focus();
+        correo.classList.add("error");
+        valid = false;
+    } else {
+        quitarClase(correo);
     }
 
     if (telefono.value === "") {
@@ -128,7 +138,7 @@ const remover = (input) => {
 // keyup -- cuando la oprimo 
 
 // Se añade un listener para el evento keyup en cada uno de los campos. Cuando se suelta una tecla, se llama a la función remover para verificar el estado del campo.
-[nombres, apellidos, telefono, direccion, documento].forEach(input => {
+[nombres, apellidos, correo, telefono, direccion, documento].forEach(input => {
     input.addEventListener("keyup", () => {
         remover(input);
     });
@@ -190,8 +200,23 @@ telefono.addEventListener("keypress", solonumeros);
 nombres.addEventListener("keypress", (event) => {
     sololetras(event, nombres);
 });
-apellidos.addEventListener("keypress", sololetras);
+apellidos.addEventListener("keypress", (event) => {
+    sololetras(event, apellidos);
+});
 
+// Escuchar el evento 'input' en el campo de correo
+correo.addEventListener("input", (event) => {
+    correoelectronico(event, correo);
+});
+
+const correoelectronico = (event, elemento) => {
+    let validarcorreo = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    if (validarcorreo.test(elemento.value)) {
+        elemento.classList.remove("error"); // Quita clase de error si es válido
+    } else {
+        elemento.classList.add("error"); // Añade clase de error si no es válido
+    }
+};
 
 
 // const solonumeros = function(event) {
