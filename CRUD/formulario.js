@@ -1,3 +1,7 @@
+import correoelectronico from "../CRUD/modulos/modulo_correo.js";
+import { sololetras } from "../CRUD/modulos/modulos_letras.js";
+import { solonumeros } from "../CRUD/modulos/modulo_numeros.js";
+
 // Selecciona el primer formulario (<form>) en el documento HTML. Lo asigna a la variable $formulario
 const $formulario = document.querySelector("form");
 
@@ -11,25 +15,6 @@ const documento = document.querySelector("#documento");
 const correo = document.querySelector("#correo");
 const politicas = document.querySelector("#politicas");
 const boton = document.querySelector("#boton");
-
-
-// EXPRECIONES REGULARES PARA VALIDAR CADA CAMPO 
-
-// // validar nombre
-// let ValidarNombre = /^[a-zA-Z]{4,}$/; //sicurplejo alt 94
-
-// // validar apellido 
-// const ValidarApellido = /^[a-zA-Z\s]{4,}$/;
-// const ValidarApellido1 = /^[a-zA-ZáéíóúÁÉÍÓÚ\s]{4,}$/;
-
-// // validar telefono
-// const telefonoRegex = /^\d{10}$/; // 10 dígitos, sin espacios ni caracteres especiales
-
-// // validar dirrecion
-// const ValidarDireccion = /^[a-zA-Z0-9\s,.'-]{3,}$/; // Letras, números, espacios, comas, puntos y guiones
-
-// // validar documento
-// const ValidarDocumento = /^[0-9]{8,10}$/;  // Entre 8 y 10 dígitos
 
 
 // Función que elimina la clase error de un campo de entrada (input). Se utiliza para limpiar el estado de error cuando el campo es válido.
@@ -115,7 +100,6 @@ const validar = (event) => {
     // Si todos los campos son válidos y las políticas están aceptadas
     if (valid) {
         alert("Formulario enviado");
-        // Aquí puedes realizar la acción de envío real
     }
 };
 
@@ -157,78 +141,92 @@ tipodocumento.addEventListener("change", () => {
 });
 
 // Manejar el estado del botón de enviar según el checkbox
-boton.setAttribute('disabled', '');
+addEventListener("DOMContentLoaded", (event) => {
+    if(!politicas.checked) {
+        console.log(boton);
+        boton.setAttribute("disabled", "");
+    }
+});
 
-politicas.addEventListener("change", () => {
-    if (politicas.checked) {
+politicas.addEventListener("change", function (e) {
+    if (e.target.checked) {
         boton.removeAttribute("disabled");
-    } else {
-        boton.setAttribute("disabled", "disabled");
-    }
-});
-
-// boton.addEventListener('click', function(){
-//     alert("-")
-// })
-
-nombres.addEventListener("keypress", (event) => {
-    console.log(event);
-    console.log(this.value);
+    } 
 });
 
 
-const solonumeros = function(event) {
-    if(event.keyCode < 48 || event.keyCode > 57) 
-    event.preventDefault();
-};
-
-const sololetras = (event, elemento) => {
-    // console.log(elemento.value);
-    let Letras = /^[a-zA-ZÀ-ÿ\s]+$/; // Letras y espacios, pueden llevar acentos
-    if (Letras.test(event.key)) {
-        console.log("si")
-    } else {
-        console.log("no")
-        event.preventDefault();
-    }
-    // if(event.keyCode < 97 || event.keyCode > 122) 
-    // event.preventDefault();
-};
-
-const correoelectronico = (event, elemento) => {
-    let validarcorreo = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-
-    // Prueba si el valor del campo es válido
-    if (validarcorreo.test(elemento.value)) {
-        console.log("sí"); // Cambiar a "sí" significa que es válido
-        elemento.classList.add("correcto"); // Añade clase de correcto si es válido
-        elemento.classList.remove("error"); // Quita clase de error si es válido
-    } else {
-        console.log("no"); // Cambiar a "no" significa que es inválido
-        elemento.classList.add("error"); // Añade clase de error si no es válido
-        elemento.classList.remove("correcto"); // Quita clase de correcto si no es válido
-    }
-};
-
+// Validación del documento
 documento.addEventListener("keypress", solonumeros);
+
+// Validación del telefono
 telefono.addEventListener("keypress", solonumeros);
+
+// Validación del nombre 
 nombres.addEventListener("keypress", (event) => {
     sololetras(event, nombres);
 });
+
+// Validación del apellido
 apellidos.addEventListener("keypress", (event) => {
     sololetras(event, apellidos);
 });
 
-// Validación en tiempo real del correo electrónico
-correo.addEventListener("input", (event) => {
+// Validación del correo electrónico
+correo.addEventListener("blur", (event) => {
     correoelectronico(event, correo);
 });
+
+
+
+
+
+// EXPRECIONES REGULARES PARA VALIDAR CADA CAMPO 
+
+// // validar nombre
+// let ValidarNombre = /^[a-zA-Z]{4,}$/; //sicurplejo alt 94
+
+// // validar apellido 
+// const ValidarApellido = /^[a-zA-Z\s]{4,}$/;
+// const ValidarApellido1 = /^[a-zA-ZáéíóúÁÉÍÓÚ\s]{4,}$/;
+
+// // validar telefono
+// const telefonoRegex = /^\d{10}$/; // 10 dígitos, sin espacios ni caracteres especiales
+
+// // validar dirrecion
+// const ValidarDireccion = /^[a-zA-Z0-9\s,.'-]{3,}$/; // Letras, números, espacios, comas, puntos y guiones
+
+// // validar documento
+// const ValidarDocumento = /^[0-9]{8,10}$/;  // Entre 8 y 10 dígitos
+
+// Manejar el estado del botón de enviar según el checkbox
+// boton.setAttribute('disabled', '');
+
+// politicas.addEventListener("change", () => {
+//     if (politicas.checked) {
+//         boton.removeAttribute("disabled");
+//     } else {
+//         boton.setAttribute("disabled", "disabled");
+//     }
+// });
+
+// boton.addEventListener('click', function(){
+//     alert("Debes aceptar las políticas de uso");
+// })
+
+// nombres.addEventListener("keypress", (event) => {
+//     console.log(event);
+//     console.log(this.value);
+// });
+
 
 // darlyhernadez0624@gmail.com
 // usuario@.com
 
-
-// ^: Inicio de la cadena.
+// w son los alfa numericos chorgan
+// W son los que no son alfa numericos
+// agrupavamos en una expresion regular
+// \ baquelas
+// ^: Inicio de la cadena. //sicurplejo alt 94
 // [a-zA-Z0-9_.+-]+: Uno o más caracteres permitidos antes de '@' (letras, dígitos, '.', '_', '+', '-').
 // @: Obligatorio, separa la parte local del dominio.
 // [a-zA-Z0-9-]+: Uno o más caracteres permitidos para el dominio antes del primer punto (letras, dígitos, '-').
@@ -278,3 +276,5 @@ correo.addEventListener("input", (event) => {
 // documento.addEventListener("keyup", function (event) {
 //     // console.log(event)
 // });
+
+// evento blur para el focus 
