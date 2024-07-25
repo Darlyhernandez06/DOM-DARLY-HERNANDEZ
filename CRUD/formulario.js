@@ -1,7 +1,11 @@
+// importanciones
+
 import correoelectronico from "../CRUD/modulos/modulo_correo.js";
 import { sololetras } from "../CRUD/modulos/modulos_letras.js";
 import { solonumeros } from "../CRUD/modulos/modulo_numeros.js";
 import {  validar, remover } from "../CRUD/modulos/modulo_validaciones.js"
+
+// variables 
 
 // Selecciona el primer formulario (<form>) en el documento HTML. Lo asigna a la variable $formulario
 const $formulario = document.querySelector("form");
