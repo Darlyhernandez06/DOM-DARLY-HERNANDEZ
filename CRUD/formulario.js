@@ -4,6 +4,7 @@ import correoelectronico from "../CRUD/modulos/modulo_correo.js";
 import { sololetras } from "../CRUD/modulos/modulos_letras.js";
 import { solonumeros } from "../CRUD/modulos/modulo_numeros.js";
 import {  validar, remover } from "../CRUD/modulos/modulo_validaciones.js"
+import is_valid from "./modulos/modulo_valid.js";
 
 // variables 
 
@@ -22,18 +23,21 @@ const politicas = document.querySelector("#politicas");
 const boton = document.querySelector("#boton");
 
 //  Se añade un listener al formulario que llama a la función validar cuando se intenta enviar el formulario.
-$formulario.addEventListener("submit", validar);
+$formulario.addEventListener("submit", (event) => {
+    is_valid(event, "form > [required]")
+});
 
 // keydown -- cuando ecribo tecla por tecla 
 // keypress -- cuando la presiono
 // keyup -- cuando la oprimo 
 
-// Se añade un listener para el evento keyup en cada uno de los campos. Cuando se suelta una tecla, se llama a la función remover para verificar el estado del campo.
-[nombres, apellidos, correo, telefono, direccion, documento].forEach(input => {
-    input.addEventListener("keyup", () => {
-        remover(input);
-    });
-});
+// // Se añade un listener para el evento keyup en cada uno de los campos. Cuando se suelta una tecla, se llama a la función remover para verificar el estado del campo.
+// [nombres, apellidos, correo, telefono, direccion, documento].forEach(input => {
+//     input.addEventListener("keyup", () => {
+//         remover(input);
+//     });
+// });
+
 
 // Manejar el cambio en el tipo de documento
 // Al cambiar el valor del tipo de documento, se verifica si es diferente de "0". Se actualiza el estado visual del campo según corresponda.
@@ -84,3 +88,4 @@ apellidos.addEventListener("keypress", (event) => {
 correo.addEventListener("blur", (event) => {
     correoelectronico(event, correo);
 });
+
