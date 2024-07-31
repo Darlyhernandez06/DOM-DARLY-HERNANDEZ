@@ -31,6 +31,7 @@ $formulario.addEventListener("submit", (event) => {
         nombres: nombres.value,
         apellidos: apellidos.value,
         telefono: telefono,
+        direccion: direccion,
         tipodocumento: tipodocumento.value,
         documento: documento.value,
         correo: correo.value
