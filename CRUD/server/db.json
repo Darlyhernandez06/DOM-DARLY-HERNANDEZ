@@ -1,6 +1,15 @@
 {
   "user": [
-
+    {
+      "id": "d5d0",
+      "nombres": "Darly Dayana",
+      "apellidos": "Hernandez Martinez",
+      "telefono": "3152132954",
+      "direccion": "Calle 42 A #16-97 Rincon de Giron parte alta",
+      "tipodocumento": "1",
+      "documento": "1097095963",
+      "correo": "darlyhernadez0624@gmail.com"
+    }
   ],
   "documento": []
 }

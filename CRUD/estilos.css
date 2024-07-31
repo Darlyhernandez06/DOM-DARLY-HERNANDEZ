@@ -52,6 +52,10 @@ label{
     border: solid 2px #5ccb5f;
 }
 
+.error-message {
+    color: #bd0003;
+}
+
 .button__checkbox{
     display: flex;
     justify-content: center;

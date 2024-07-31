@@ -1,6 +1,6 @@
 // importanciones
 
-import correoelectronico from "../CRUD/modulos/modulo_correo.js";
+import { correoelectronico } from "./modulos/modulo_correo.js";
 import { sololetras } from "../CRUD/modulos/modulos_letras.js";
 import { solonumeros } from "../CRUD/modulos/modulo_numeros.js";
 import is_valid from "./modulos/modulo_valid.js";
@@ -28,6 +28,7 @@ $formulario.addEventListener("submit", (event) => {
     // para hacer las peticiones 
     // En lugar de pasar la ruta al recurso que deseas solicitar a la llamada del método fetch(), puedes crear un objeto de petición
     // capturar todos los atributos
+
     const data = {
         nombres: nombres.value,
         apellidos: apellidos.value,
@@ -60,7 +61,7 @@ $formulario.addEventListener("submit", (event) => {
         document.querySelector("#boton").disabled = true; // Desabilitar el boton
     }
 });
-    
+
 // GET se utiliza para obtener un recurso especifico del servidor
 // POST se utiliza para crear un nuevo recurso en el servidor
 // PUT se utiliza para actualizar un recurso exitente en el servidor
@@ -81,10 +82,12 @@ $formulario.addEventListener("submit", (event) => {
 // Manejar el cambio en el tipo de documento
 // Al cambiar el valor del tipo de documento, se verifica si es diferente de "0". Se actualiza el estado visual del campo según corresponda.
 tipodocumento.addEventListener("change", () => {
-    if (tipodocumento.value === "0") {
-        tipodocumento.classList.remove("correcto");
+    if (tipodocumento.value === "") {
+        // Si el valor es "0", significa que no se ha seleccionado un tipo de documento
         tipodocumento.classList.add("error");
+        tipodocumento.classList.remove("correcto");
     } else {
+        // Si el valor no es "0", significa que se ha seleccionado un tipo de documento
         tipodocumento.classList.remove("error");
         tipodocumento.classList.add("correcto");
     }
@@ -103,6 +106,8 @@ politicas.addEventListener("change", function (e) {
     } 
 });
 
+// Agrega el evento de submit al formulario
+// document.querySelector("form").addEventListener("submit", validar);
 
 // Validaciones específicas
 
