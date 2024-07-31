@@ -18,5 +18,6 @@ const is_valid = (event, form) => {
     } else {
       alert("Incorrecto los campos estan vacios");
     }
+    return todosLlenos;
 }
 export default is_valid;

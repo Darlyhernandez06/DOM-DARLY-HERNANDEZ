@@ -96,3 +96,12 @@
 // });
 
 // evento blur para el focus 
+{/* <script>
+function añadirAficion(){
+  let documento = document.querySelector("#tipodocumento");
+  let inputnueva = document.querySelector("#inputnueva").value;
+  let option = document.createElement("option");
+  option.text = inputnueva;
+  documento.add(option);
+}
+</script> */}
