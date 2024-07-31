@@ -3,7 +3,6 @@
 import correoelectronico from "../CRUD/modulos/modulo_correo.js";
 import { sololetras } from "../CRUD/modulos/modulos_letras.js";
 import { solonumeros } from "../CRUD/modulos/modulo_numeros.js";
-import {  validar, remover } from "../CRUD/modulos/modulo_validaciones.js"
 import is_valid from "./modulos/modulo_valid.js";
 
 // variables 
@@ -24,7 +23,19 @@ const boton = document.querySelector("#boton");
 
 //  Se añade un listener al formulario que llama a la función validar cuando se intenta enviar el formulario.
 $formulario.addEventListener("submit", (event) => {
-    is_valid(event, "form > [required]")
+    is_valid(event, "form [required]")
+    // para hacer las peticiones 
+    // En lugar de pasar la ruta al recurso que deseas solicitar a la llamada del método fetch(), puedes crear un objeto de petición
+    // capturar todos los atributos
+    const data = {
+        nombres: nombres.value,
+        apellidos: apellidos.value,
+        telefono: telefono,
+        tipodocumento: tipodocumento.value,
+        documento: documento.value,
+        correo: correo.value
+    }
+    console.log(data)
 });
 
 // keydown -- cuando ecribo tecla por tecla 
@@ -54,7 +65,6 @@ tipodocumento.addEventListener("change", () => {
 // Manejar el estado del botón de enviar según el checkbox
 addEventListener("DOMContentLoaded", (event) => {
     if(!politicas.checked) {
-        console.log(boton);
         boton.setAttribute("disabled", "");
     }
 });
