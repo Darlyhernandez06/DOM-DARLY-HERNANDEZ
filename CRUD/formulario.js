@@ -1,10 +1,11 @@
 // importanciones
 
 import { correoelectronico } from "./modulos/modulo_correo.js";
-import { sololetras } from "../CRUD/modulos/modulos_letras.js";
-import { solonumeros } from "../CRUD/modulos/modulo_numeros.js";
+import { sololetras } from "./modulos/modulos_letras.js";
+import { solonumeros } from "./modulos/modulo_numeros.js";
 import is_valid from "./modulos/modulo_valid.js";
 import { remover } from "./modulos/modulo_validaciones.js";
+import solicitud from "./modulos/modulo_usuarios.js";
 
 // variables 
 
@@ -49,6 +50,25 @@ $formulario.addEventListener("submit", (event) => {
         .then((response) => response.json())
         .then(data => {
             console.log(data);
+            nombres.value = "";
+            apellidos.value = "";
+            telefono.value = "";
+            direccion.value = "";
+            documento.value = "";
+            correo.value = "";
+
+            nombres.classList.remove("correcto");
+            apellidos.classList.remove("correcto");
+            telefono.classList.remove("correcto");
+            direccion.classList.remove("correcto");
+            documento.classList.remove("correcto");
+            correo.classList.remove("correcto");
+
+            politicas.checked = false;
+
+            tipodocumento.value = "";
+            tipodocumento.classList.remove("correcto");
+
             alert("Señor usuario tus datos fueron enviados exitosamente");
         })
         .catch(error => {
@@ -93,8 +113,43 @@ tipodocumento.addEventListener("change", () => {
     }
 });
 
+// AGREGANDO LA NUEVA OPTION AL SELECT
+const documentos = () => {
+    const fragment = document.createDocumentFragment();
+    fetch('http://localhost:3000/documento')
+    .then((response) => response.json())
+    .then((data) => {
+
+        let optiondeterminada = document.createElement("option"); // crear la opcion por defecto
+        optiondeterminada.value = ""; // valor vacio para la opcion por defecto 
+        optiondeterminada.textContent ="Selecciona el tipo de documento...";
+        optiondeterminada.select = true; // para que quede selecciona como predeterminada
+        fragment.appendChild( optiondeterminada); // se agrega la opcion por defecto al fragemen
+
+        data.forEach(element => {
+            console.log(element);
+            let option = document.createElement("option");
+            option.value = element.id;
+            option.textContent = element.nombre;
+            fragment.appendChild(option);
+        });
+        tipodocumento.appendChild(fragment);
+    })
+}
+
+// LISTAR LOS USUARIOS 
+const listarUsuarios = () => {
+    solicitud("users")
+    .then(data => {
+        console.log(data);
+    })
+}
+
+
 // Manejar el estado del botón de enviar según el checkbox
 addEventListener("DOMContentLoaded", (event) => {
+    listarUsuarios();
+    documentos();
     if(!politicas.checked) {
         boton.setAttribute("disabled", "");
     }
