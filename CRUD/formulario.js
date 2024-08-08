@@ -6,6 +6,7 @@ import { solonumeros } from "./modulos/modulo_numeros.js";
 import is_valid from "./modulos/modulo_valid.js";
 import { remover } from "./modulos/modulo_validaciones.js";
 import solicitud from "./modulos/modulo_usuarios.js";
+import { URL } from "./modulos/config.js";
 
 // variables 
 
@@ -22,6 +23,14 @@ const documento = document.querySelector("#documento");
 const correo = document.querySelector("#correo");
 const politicas = document.querySelector("#politicas");
 const boton = document.querySelector("#boton");
+const tbody = document.querySelector("tbody");
+
+// TEMPLATE, // Obtener el template y su contenido
+const $template = document.querySelector("#template").content;
+
+// FRAGMENTOS
+const $fragmento = document.createDocumentFragment();
+
 
 //  Se añade un listener al formulario que llama a la función validar cuando se intenta enviar el formulario.
 $formulario.addEventListener("submit", (event) => {
@@ -40,14 +49,14 @@ $formulario.addEventListener("submit", (event) => {
         correo: correo.value
     }
     if (response) {
-        fetch('http://localhost:3000/user', {
+        fetch(`${URL}/users`, {
           method: 'POST',
-          body: JSON.stringify(data),
+          body: JSON.stringify(data), // se transforma a un json
           headers: {
             'Content-type': 'application/json; charset=UTF-8',
           },
         })
-        .then((response) => response.json())
+        .then((response) => response.json()) // se vuelve un objeto de js
         .then(data => {
             console.log(data);
             nombres.value = "";
@@ -70,6 +79,9 @@ $formulario.addEventListener("submit", (event) => {
             tipodocumento.classList.remove("correcto");
 
             alert("Señor usuario tus datos fueron enviados exitosamente");
+
+            createRow(data);
+            
         })
         .catch(error => {
             alert("Señor usuario tus datos no fueron enviados");
@@ -138,11 +150,46 @@ const documentos = () => {
 }
 
 // LISTAR LOS USUARIOS 
-const listarUsuarios = () => {
-    solicitud("users")
-    .then(data => {
-        console.log(data);
-    })
+const listarUsuarios = async () => {
+    const data = await solicitud("users")
+    data.forEach(element => {
+
+       // Llenar los datos del usuario en el template clonado
+       $template.querySelector('.nombre').textContent = element.nombres;
+       $template.querySelector('.apellidos').textContent = element.apellidos;
+       $template.querySelector('.correo_Electrónico').textContent = element.correo;
+       $template.querySelector('.teléfono').textContent = element.telefono;
+       $template.querySelector('.dirección').textContent = element.direccion;
+       $template.querySelector('.tipo_de_documento').textContent = element.tipodocumento;
+       $template.querySelector('.número_de_documento').textContent = element.documento;
+
+       // Clonar el contenido del template para usarlo
+       const clone = document.importNode($template, true);
+
+       $fragmento.appendChild(clone);
+
+    });
+    tbody.appendChild($fragmento);
+}
+
+const createRow = (data) => {
+    const tr =  tbody.insertRow(-1);
+
+    const tdnombre = tr.insertCell(0);
+    const tdapellidos = tr.insertCell(1);
+    const tdcorreo_Electrónico = tr.insertCell(2);
+    const tdteléfono = tr.insertCell(3);
+    const tddirección= tr.insertCell(4);
+    const tdtipo_de_documento = tr.insertCell(5);
+    const tdnúmero_de_documento = tr.insertCell(6);
+
+    tdnombre.textContent = data.nombres;
+    tdapellidos.textContent = data.apellidos;
+    tdcorreo_Electrónico.textContent = data.correo;
+    tdteléfono.textContent = data.telefono;
+    tddirección.textContent = data.direccion;
+    tdtipo_de_documento.textContent = data.tipodocumento;
+    tdnúmero_de_documento.textContent = data.documento;
 }
 
 

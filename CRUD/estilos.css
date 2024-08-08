@@ -4,10 +4,42 @@
     box-sizing: border-box;
 }
 
-form{
-    max-width: 450px;
-    width: 450px;
+.contenedor_principal {
+    max-width: 1600px;
     margin: 0 auto;
+}
+
+.mt-40 {
+    margin-top: 40px;
+}
+
+.mb-40 {
+    margin-bottom: 40px;
+}
+
+.layout {
+    display: grid;
+    grid-template-areas: "form grid-container";
+    grid-template-columns: 400px 1fr; /* 400px es un tamaño fijo y el otro es auto con 1fr */
+    gap: 1rem; /* por defecto es de 16px*/
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /*los bordes de la tabla se combinan en uno solo */
+}
+
+th, td{
+    border: 2px solid #f74780;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #ffb3c6;
+}
+
+form{
     background-color: #ffb3c6;
     border:  solid 5px #f74780;
     display: flex;

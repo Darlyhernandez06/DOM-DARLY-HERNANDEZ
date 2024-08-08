@@ -8,7 +8,7 @@
 </head>
 <body>
     <!-- Formulario de validación -->
-    <div class="contenedor_principal">
+    <div class="contenedor_principal layout mt-40 mb-40">
         <form class="form" novalidate>
             <!-- Campo del nombre completo -->
             <label for="nombres">Nombres:</label>
@@ -60,7 +60,38 @@
             <!-- Botón de enviar -->
             <button id="boton" type="submit">Enviar</button>
         </form>
+
+        <div class="grid-container">
+            <table>
+                <thead>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Correo Electrónico</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>Tipo de documento</th>
+                    <th>Número de documento</th>
+                    <th>Acciones</th>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <template id="template">
+            <tr>
+            <td class="nombre"></td>
+            <td class="apellidos"></td>
+            <td class="correo_Electrónico"></td>
+            <td class="teléfono"></td>
+            <td class="dirección"></td>
+            <td class="tipo_de_documento"></td>
+            <td class="número_de_documento"></td>
+            </tr>
+        </template>
+
     </div>
+
     <script src="formulario.js" type="module"></script>
 </body>
 </html>
