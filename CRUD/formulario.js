@@ -5,9 +5,8 @@ import { sololetras } from "./modulos/modulos_letras.js";
 import { solonumeros } from "./modulos/modulo_numeros.js";
 import is_valid from "./modulos/modulo_valid.js";
 import { remover } from "./modulos/modulo_validaciones.js";
-import solicitud from "./modulos/modulo_usuarios.js";
+import solicitud, { enviar } from "./modulos/modulo_usuarios.js";
 import { URL } from "./modulos/config.js";
-
 // variables 
 
 // Selecciona el primer formulario (<form>) en el documento HTML. Lo asigna a la variable $formulario
@@ -151,8 +150,12 @@ const documentos = () => {
 
 // LISTAR LOS USUARIOS 
 const listarUsuarios = async () => {
-    const data = await solicitud("users")
+    const data = await solicitud("users");
+    const documentos = await solicitud("documento");
+
     data.forEach(element => {
+        
+        const documento_nombre = documentos.find((documento) => documento.id === element.tipodocumento).nombre;
 
        // Llenar los datos del usuario en el template clonado
        $template.querySelector('.nombre').textContent = element.nombres;
@@ -160,14 +163,18 @@ const listarUsuarios = async () => {
        $template.querySelector('.correo_Electrónico').textContent = element.correo;
        $template.querySelector('.teléfono').textContent = element.telefono;
        $template.querySelector('.dirección').textContent = element.direccion;
-       $template.querySelector('.tipo_de_documento').textContent = element.tipodocumento;
+       $template.querySelector('.tipo_de_documento').textContent = documento_nombre;
        $template.querySelector('.número_de_documento').textContent = element.documento;
+
+       $template.querySelector(".modificar").setAttribute("data-id", element.id)
+       $template.querySelector(".eliminar").setAttribute("data-id", element.id)
+
 
        // Clonar el contenido del template para usarlo
        const clone = document.importNode($template, true);
 
        $fragmento.appendChild(clone);
-
+       
     });
     tbody.appendChild($fragmento);
 }
@@ -192,6 +199,23 @@ const createRow = (data) => {
     tdnúmero_de_documento.textContent = data.documento;
 }
 
+const buscar = async (elemento) => {
+    enviar((`users/${elemento.dataset.id}`) , {
+        method: 'PATCH',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }).then((data) => {
+        nombres.value = data.nombres;
+        apellidos.value = data.apellidos;
+        telefono.value = data.telefono;
+        direccion.value = data.direccion;
+        tipodocumento.value = data.tipodocumento;
+        documento.value = data.documento;
+        correo.value = data.correo;
+        console.log(data);
+    });
+}
 
 // Manejar el estado del botón de enviar según el checkbox
 addEventListener("DOMContentLoaded", (event) => {
@@ -232,6 +256,14 @@ apellidos.addEventListener("keypress", (event) => {
 // Validación del correo electrónico
 correo.addEventListener("blur", (event) => {
     correoelectronico(event, correo);
+});
+
+// EVENTO CLICK 
+document.addEventListener("click", (event) => {
+    if(event.target.matches(".modificar")){
+        buscar(event.target);
+
+    }
 });
 
 // toca hacer prmosas 
