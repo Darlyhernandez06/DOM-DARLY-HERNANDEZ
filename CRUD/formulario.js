@@ -199,23 +199,36 @@ const createRow = (data) => {
     tdnúmero_de_documento.textContent = data.documento;
 }
 
+// buscar datos y actualizar los campos del formulario
 const buscar = async (elemento) => {
-    enviar((`users/${elemento.dataset.id}`) , {
-        method: 'PATCH',
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      }).then((data) => {
-        nombres.value = data.nombres;
-        apellidos.value = data.apellidos;
-        telefono.value = data.telefono;
-        direccion.value = data.direccion;
-        tipodocumento.value = data.tipodocumento;
-        documento.value = data.documento;
-        correo.value = data.correo;
+    try {
+        // Obtén los datos directamente de la función enviar
+        const data = await enviar(`users/${elemento.dataset.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+            },
+        });
+
+        // Actualiza los valores de los campos del formulario
+        nombres.value = data.nombres || '';
+        apellidos.value = data.apellidos || '';
+        telefono.value = data.telefono || '';
+        direccion.value = data.direccion || '';
+        tipodocumento.value = data.tipodocumento || '';
+        documento.value = data.documento || '';
+        correo.value = data.correo || '';
+
         console.log(data);
-    });
-}
+    } catch (error) {
+        console.error('Error al buscar datos:', error);
+    }
+}    
+
+const actualizarDatos = async () => {
+    
+};
+
 
 // Manejar el estado del botón de enviar según el checkbox
 addEventListener("DOMContentLoaded", (event) => {
