@@ -7,6 +7,7 @@ import is_valid from "./modulos/modulo_valid.js";
 import { remover } from "./modulos/modulo_validaciones.js";
 import solicitud, { enviar } from "./modulos/modulo_usuarios.js";
 import { URL } from "./modulos/config.js";
+import limpiarformulario from "./modulos/modulo_limpiarformulario.js";
 // variables 
 
 // Selecciona el primer formulario (<form>) en el documento HTML. Lo asigna a la variable $formulario
@@ -23,6 +24,7 @@ const correo = document.querySelector("#correo");
 const politicas = document.querySelector("#politicas");
 const boton = document.querySelector("#boton");
 const tbody = document.querySelector("tbody");
+const user = document.querySelector("#user");
 
 // TEMPLATE, // Obtener el template y su contenido
 const $template = document.querySelector("#template").content;
@@ -32,66 +34,65 @@ const $fragmento = document.createDocumentFragment();
 
 
 //  Se añade un listener al formulario que llama a la función validar cuando se intenta enviar el formulario.
-$formulario.addEventListener("submit", (event) => {
-    let response = is_valid(event, "form [required]")
-    // para hacer las peticiones 
-    // En lugar de pasar la ruta al recurso que deseas solicitar a la llamada del método fetch(), puedes crear un objeto de petición
-    // capturar todos los atributos
+// $formulario.addEventListener("submit", (event) => {
+//     let response = is_valid(event, "form [required]")
+//     // para hacer las peticiones 
+//     // En lugar de pasar la ruta al recurso que deseas solicitar a la llamada del método fetch(), puedes crear un objeto de petición
+//     // capturar todos los atributos
 
-    const data = {
-        nombres: nombres.value,
-        apellidos: apellidos.value,
-        telefono: telefono.value,
-        direccion: direccion.value,
-        tipodocumento: tipodocumento.value,
-        documento: documento.value,
-        correo: correo.value
-    }
-    if (response) {
-        fetch(`${URL}/users`, {
-          method: 'POST',
-          body: JSON.stringify(data), // se transforma a un json
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        })
-        .then((response) => response.json()) // se vuelve un objeto de js
-        .then(data => {
-            console.log(data);
-            nombres.value = "";
-            apellidos.value = "";
-            telefono.value = "";
-            direccion.value = "";
-            documento.value = "";
-            correo.value = "";
+//     const data = {
+//         nombres: nombres.value,
+//         apellidos: apellidos.value,
+//         telefono: telefono.value,
+//         direccion: direccion.value,
+//         tipodocumento: tipodocumento.value,
+//         documento: documento.value,
+//         correo: correo.value
+//     }
+//     if (response) {
+//         fetch(`${URL}/users`, {
+//           method: 'POST',
+//           body: JSON.stringify(data), // se transforma a un json
+//           headers: {
+//             'Content-type': 'application/json; charset=UTF-8',
+//           },
+//         })
+//         .then((response) => response.json()) // se vuelve un objeto de js
+//         .then(data => {
+//             nombres.value = "";
+//             apellidos.value = "";
+//             telefono.value = "";
+//             direccion.value = "";
+//             documento.value = "";
+//             correo.value = "";
 
-            nombres.classList.remove("correcto");
-            apellidos.classList.remove("correcto");
-            telefono.classList.remove("correcto");
-            direccion.classList.remove("correcto");
-            documento.classList.remove("correcto");
-            correo.classList.remove("correcto");
+//             nombres.classList.remove("correcto");
+//             apellidos.classList.remove("correcto");
+//             telefono.classList.remove("correcto");
+//             direccion.classList.remove("correcto");
+//             documento.classList.remove("correcto");
+//             correo.classList.remove("correcto");
 
-            politicas.checked = false;
+//             politicas.checked = false;
 
-            tipodocumento.value = "";
-            tipodocumento.classList.remove("correcto");
+//             tipodocumento.value = "";
+//             tipodocumento.classList.remove("correcto");
 
-            alert("Señor usuario tus datos fueron enviados exitosamente");
+//             alert("Señor usuario tus datos fueron enviados exitosamente");
 
-            createRow(data);
+//             createRow(data);
             
-        })
-        .catch(error => {
-            alert("Señor usuario tus datos no fueron enviados");
-            console.error("error")
-        })
-        .finally(() => {
-            document.querySelector("#boton").disabled = false; // Habilitar el boton
-        });
-        document.querySelector("#boton").disabled = true; // Desabilitar el boton
-    }
-});
+//         })
+//         .catch(error => {
+//             alert("Señor usuario tus datos no fueron enviados");
+//             console.error("error")
+//         })
+//         .finally(() => {
+//             document.querySelector("#boton").disabled = false; // Habilitar el boton
+//         });
+//         document.querySelector("#boton").disabled = true; // Desabilitar el boton
+//     }
+// });
 
 // GET se utiliza para obtener un recurso especifico del servidor
 // POST se utiliza para crear un nuevo recurso en el servidor
@@ -138,7 +139,7 @@ const documentos = () => {
         fragment.appendChild( optiondeterminada); // se agrega la opcion por defecto al fragemen
 
         data.forEach(element => {
-            console.log(element);
+            //console.log(element);
             let option = document.createElement("option");
             option.value = element.id;
             option.textContent = element.nombre;
@@ -199,6 +200,61 @@ const createRow = (data) => {
     tdnúmero_de_documento.textContent = data.documento;
 }
 
+//
+const save = (event) => {
+    let response = is_valid(event, "form [required]");
+    event.preventDefault();
+    const data = {
+        nombres: nombres.value,
+        apellidos: apellidos.value,
+        telefono: telefono.value,
+        direccion: direccion.value,
+        tipodocumento: tipodocumento.value,
+        documento: documento.value,
+        correo: correo.value
+    }
+    
+    if(response) {
+        if(user.value === ""){
+            guardar(data)
+        }else {
+            actualiza(data)
+        }
+    }
+    
+}
+
+const guardar = (data) => {
+    console.log(data);
+
+    return
+    fetch(`${URL}/users`, {
+        method: 'POST',
+        body: JSON.stringify(data), 
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+    .then((response) => response.json())
+    .then((json)=> {
+        nombres.value ="";
+        createRow(json)
+    });
+}
+
+const actualiza = async (data) =>{
+    //console.log(data);
+    const response = await enviar (`users/${user.value}`, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+    limpiarformulario();
+}
+
+
 // buscar datos y actualizar los campos del formulario
 const buscar = async (elemento) => {
     try {
@@ -209,26 +265,42 @@ const buscar = async (elemento) => {
                 'Content-Type': 'application/json; charset=UTF-8',
             },
         });
-
-        // Actualiza los valores de los campos del formulario
-        nombres.value = data.nombres || '';
-        apellidos.value = data.apellidos || '';
-        telefono.value = data.telefono || '';
-        direccion.value = data.direccion || '';
-        tipodocumento.value = data.tipodocumento || '';
-        documento.value = data.documento || '';
-        correo.value = data.correo || '';
-
-        console.log(data);
+        loadFrom(data);
     } catch (error) {
         console.error('Error al buscar datos:', error);
     }
-}    
+}  
+
+const loadFrom = (data) => {
+    const {
+    id,
+    nombres: user_nombres, // ALIAS
+    apellidos: user_apellidos,
+    telefono: user_telefono,
+    direccion: user_direccion,
+    tipodocumento: user_tipodocumento,
+    documento: user_documento,
+    correo: user_correo,
+    } = data;
+
+    // Actualiza los valores de los campos del formulario
+    user.value = id;
+    nombres.value = user_nombres;
+    apellidos.value = user_apellidos;
+    telefono.value = user_telefono;
+    direccion.value = user_direccion;
+    tipodocumento.value = user_tipodocumento;
+    documento.value = user_documento;
+    correo.value = user_correo;
+
+    politicas.checked = true;
+    boton.removeAttribute("disabled");
+}
 
 const actualizarDatos = async () => {
-    
 };
 
+$formulario.addEventListener('submit', save );
 
 // Manejar el estado del botón de enviar según el checkbox
 addEventListener("DOMContentLoaded", (event) => {
@@ -281,3 +353,4 @@ document.addEventListener("click", (event) => {
 
 // toca hacer prmosas 
 // formulario nuevvo que lleno el slecter
+// colocarle un aleas a la destruraccion 
