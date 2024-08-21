@@ -17,5 +17,6 @@ const limpiarformulario = () =>{
 
     tipodocumento.value = "";
     tipodocumento.classList.remove("correcto");
+    boton.setAttribute("disabled", "");
 }
 export default limpiarformulario;

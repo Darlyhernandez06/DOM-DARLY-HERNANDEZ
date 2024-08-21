@@ -157,6 +157,8 @@ const listarUsuarios = async () => {
     data.forEach(element => {
         
         const documento_nombre = documentos.find((documento) => documento.id === element.tipodocumento).nombre;
+        
+        $template.querySelector("tr").id = `user_${element.id}`;
 
        // Llenar los datos del usuario en el template clonado
        $template.querySelector('.nombre').textContent = element.nombres;
@@ -225,9 +227,6 @@ const save = (event) => {
 }
 
 const guardar = (data) => {
-    console.log(data);
-
-    return
     fetch(`${URL}/users`, {
         method: 'POST',
         body: JSON.stringify(data), 
@@ -237,7 +236,7 @@ const guardar = (data) => {
     })
     .then((response) => response.json())
     .then((json)=> {
-        nombres.value ="";
+        limpiarformulario();
         createRow(json)
     });
 }
@@ -251,9 +250,38 @@ const actualiza = async (data) =>{
             'Content-type': 'application/json; charset=UTF-8',
         },
     })
-    limpiarformulario();
+    limpiarformulario(); // limpiamos el formulario 
+    editRow(response); // modificamos el tr
 }
 
+const eliminar =  async (element) => {
+    const tr = document.querySelector(`#user_${element.dataset.id}`)
+    const data = await enviar(`users/${element.dataset.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+    })
+    alert(`Desea eliminar a:${nombres.value}`);
+    tr.remove();
+}
+
+// API es como un conjunto de instrucciones para comunicarse entre sistemas, mientras que API RESTful es como un conjunto de instrucciones específicas para comunicarse entre
+// sistemas utilizando el protocolo HTTP, como un manual de instrucciones para una cosa específica.
+
+// HTTP es un protocolo de solicitud-respuesta, lo que significa que un cliente(como un navegador web) envia una solicitud a un servidor y el servidor responde con los datos
+// solicitados.
+
+// - GET /Obtener lista de usuarios.
+// - GET / Obtener usuario con ID 123.
+// - POST / Crear nuevo usuario.
+// - PUT / Actualizar usuario con ID 123.
+// - DELETE / Eliminar usuario con ID 123.
+// PATCH se utiliza para modificar una parte de un recurso existente (dejando otros aspectos del mismo sin modificar). 
+// La operación PUT se utiliza para sustituir todo el contenido de un recurso existente por nuevos datos.
+
+// Con setter, asignas un valor.
+// Con getter, lo recibes.
 
 // buscar datos y actualizar los campos del formulario
 const buscar = async (elemento) => {
@@ -270,6 +298,18 @@ const buscar = async (elemento) => {
         console.error('Error al buscar datos:', error);
     }
 }  
+
+const editRow = (data) => {
+    
+    const tr = document.querySelector(`#user_${data.id}`);
+    tr.querySelector('.nombre').textContent = data.nombres;
+    tr.querySelector('.apellidos').textContent = data.apellidos;
+    tr.querySelector('.correo_Electrónico').textContent = data.correo;
+    tr.querySelector('.teléfono').textContent = data.telefono;
+    tr.querySelector('.dirección').textContent = data.direccion;
+    tr.querySelector('.tipo_de_documento').textContent = data.tipodocumento;
+    tr.querySelector('.número_de_documento').textContent = data.documento;
+}
 
 const loadFrom = (data) => {
     const {
@@ -296,9 +336,6 @@ const loadFrom = (data) => {
     politicas.checked = true;
     boton.removeAttribute("disabled");
 }
-
-const actualizarDatos = async () => {
-};
 
 $formulario.addEventListener('submit', save );
 
@@ -347,7 +384,11 @@ correo.addEventListener("blur", (event) => {
 document.addEventListener("click", (event) => {
     if(event.target.matches(".modificar")){
         buscar(event.target);
-
+    }
+});
+document.addEventListener("click", (event) => {
+    if(event.target.matches(".eliminar")){
+        eliminar(event.target);
     }
 });
 
