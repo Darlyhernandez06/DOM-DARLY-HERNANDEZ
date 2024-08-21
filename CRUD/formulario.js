@@ -254,17 +254,37 @@ const actualiza = async (data) =>{
     editRow(response); // modificamos el tr
 }
 
-const eliminar =  async (element) => {
-    const tr = document.querySelector(`#user_${element.dataset.id}`)
-    const data = await enviar(`users/${element.dataset.id}`, {
-        method: 'DELETE',
+const eliminar = async (element) => {
+    const userId = element.dataset.id;
+    const tr = document.querySelector(`#user_${userId}`);
+
+    const userData = await enviar(`users/${userId}`, {
+        method: 'PATCH',
         headers: {
-          'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
         }
-    })
-    alert(`Desea eliminar a:${nombres.value}`);
-    tr.remove();
-}
+    });
+
+    if (userData) {
+        const userName = userData.nombres; 
+
+        const confirmDelete = confirm(`Desea eliminar a: ${userName}?`);
+
+        if (confirmDelete) {
+            const data = await enviar(`users/${userId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            // Elimina la fila de la tabla
+            tr.remove();
+        }
+    } else {
+        alert('No se pudo obtener la información del usuario.');
+    }
+};
 
 // API es como un conjunto de instrucciones para comunicarse entre sistemas, mientras que API RESTful es como un conjunto de instrucciones específicas para comunicarse entre
 // sistemas utilizando el protocolo HTTP, como un manual de instrucciones para una cosa específica.
